@@ -1,0 +1,48 @@
+<main>
+  <section>
+    <article>
+      <h2>Introduction</h2>
+      <p-messages severity="info">
+        <ng-template pTemplate>
+          <div>
+            <p class="text-xl font-bold">
+              Software is tested to uncover errors made unintentionally during design and construction.
+              An <span pTooltip="It is a mistake made by a programmer."
+                       style="border-bottom: 1px dashed #0000FF; cursor: help;"
+                       tooltipPosition="top">ERROR</span> introduces a
+              <span
+                pTooltip="It is a discrepancy between the correct version of a component or system and an incorrect version."
+                style="border-bottom: 1px dashed #0000FF; cursor: help;" tooltipPosition="top">DEFECT</span> in the
+              software, which causes a
+              <span pTooltip="Physical or functional manifestation of a defect (does not follow its normal course)."
+                    style="border-bottom: 1px dashed #0000FF; cursor: help;" tooltipPosition="top">FAILURE</span> when
+              running tests.
+            </p>
+          </div>
+        </ng-template>
+      </p-messages>
+    </article>
+  </section>
+
+  <h2 class="mt-5">Template</h2>
+  <p-table>
+    <ng-template pTemplate="caption">
+      <h3>
+        Specifications
+      </h3>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <h3>
+        Actions
+      </h3>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+      <h3>
+        Results
+      </h3>
+    </ng-template>
+  </p-table>
+
+</main>

@@ -1,4 +1,4 @@
-<main>
+<main class="px-6">
   <section>
     <article>
       <h2>Introduction</h2>
@@ -24,79 +24,110 @@
     </article>
   </section>
 
-  <h2 class="mt-5">Template Test Case</h2>
-  <p-table>
-    <ng-template pTemplate="caption">
-      <h3 class="text-left underline">Specifications</h3>
-      <div class="formgrid grid">
-        <div class="field col-12 md:col-6">
-          <label for="test-case-id">ID</label>
-          <input class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" id="test-case-id"
-                 type="text">
-        </div>
-        <div class="field col-12 md:col-6">
-          <label for="test-case-author">Author</label>
-          <input class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" id="test-case-author"
-                 type="text">
-        </div>
-        <div class="field col-12">
-          <label for="test-case-requirement">Requirement</label>
-          <input class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" id="test-case-requirement"
-                 type="text">
-        </div>
-        <div class="field col-12">
-          <label for="test-case-purpose">Purpose</label>
-          <input class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" id="test-case-purpose"
-                 type="text">
-        </div>
-      </div>
-    </ng-template>
+  <h2 class="my-5">Template</h2>
 
-    <ng-template pTemplate="header">
-      <div class="p-grid">
-        <div class="p-col">
-          <h3 class="text-left underline ml-3">Actions</h3>
-          <h3 class="text-center">Description of the actions and/or conditions for the tests</h3>
+  <h4 class="text-left">Specifications</h4>
+  <div class="grid">
+    <div class="col-6 md:col-12 lg:col-6">
+      <div class="flex flex-column gap-2">
+        <label for="test-case-id">ID</label>
+        <input autocomplete="off" id="test-case-id" pInputText/>
+      </div>
+    </div>
+    <div class="col-6 md:col-12 lg:col-6">
+      <div class="flex flex-column gap-2">
+        <label for="test-case-author">Author</label>
+        <input autocomplete="off" id="test-case-author" pInputText/>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="flex flex-column gap-2">
+        <label for="test-case-requirement">Requirement</label>
+        <input autocomplete="off" id="test-case-requirement" pInputText/>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="flex flex-column gap-2">
+        <label for="test-case-purpose">Purpose</label>
+        <input autocomplete="off" id="test-case-purpose" pInputText/>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="text-left">Details</h4>
+  <div class="grid nested-grid">
+    <div class="col-12">
+      <h3 class="text-center">Description of the actions and/or conditions for the tests</h3>
+    </div>
+    <div class="col-12">
+      <div class="grid text-center">
+        <div class="col">
+          <p-button (click)="addRow()" [rounded]="true" icon="pi pi-check" label="Add row"
+                    severity="success"></p-button>
+        </div>
+        <div class="col">
+          <p-button (click)="deleteRow()" [rounded]="true" icon="pi pi-times" label="Delete row"
+                    severity="secondary"></p-button>
+        </div>
+        <div class="col">
+          <p-button (click)="clearTable()" [rounded]="true" icon="pi pi-trash" label="Clear table"
+                    severity="danger"></p-button>
         </div>
       </div>
-      <p-menubar [model]="items"></p-menubar>
-      <p-table [value]="testCases">
+    </div>
+    <div class="col-12">
+      <p-table [value]="testCasesList" responsiveLayout="stack" styleClass="p-datatable-gridlines">
         <ng-template pTemplate="header">
           <tr>
             <th>Nro</th>
-            <th>Actions (Inputs)</th>
-            <th>Expected Output</th>
-            <th>Actual Output</th>
+            <th>Actions (inputs)</th>
+            <th>Expected output</th>
+            <th>Actual output</th>
           </tr>
         </ng-template>
-
-        <ng-template pTemplate="body" let-testCase let-i="rowIndex">
+        <ng-template let-testCase pTemplate="body">
           <tr>
-            <td>{{ i + 1 }}</td>
+            <td>{{ testCase.step }}</td>
             <td>{{ testCase.testActions }}</td>
             <td>{{ testCase.expectedOutput }}</td>
             <td>{{ testCase.actualOutput }}</td>
           </tr>
         </ng-template>
       </p-table>
-    </ng-template>
+    </div>
+  </div>
 
-    <ng-template pTemplate="summary">
-      <h3 class="text-left underline">Results obtained</h3>
-      <div class="formgrid grid">
-        <div class="field col-12">
-          <p>Results (passed/failed)</p>
-          <div class="formgroup-inline gap-3">
-            <p-checkbox name="groupname" value="test-case-passed" label="Passed"></p-checkbox>
-            <p-checkbox name="groupname" value="test-case-failed" label="Failed"></p-checkbox>
-          </div>
+  <h4 class="text-left">Results</h4>
+  <div class="grid">
+    <div class="col-12 text-center">
+      <div class="flex flex-wrap gap-3">
+        <div class="flex align-items-center">
+          <p-radioButton [(ngModel)]="testResult" id="passed-id" inputId="passed-id" name="passed-failed"
+                         value="Passed"></p-radioButton>
+          <label class="ml-2" for="passed-id">Passed</label>
         </div>
-        <div class="field col-12">
-          <label for="test-case-observations">Observations</label>
-          <input class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" id="test-case-observations"
-                 type="text">
+        <div class="flex align-items-center">
+          <p-radioButton [(ngModel)]="testResult" id="failed-id" inputId="failed-id" name="passed-failed"
+                         value="Failed"></p-radioButton>
+          <label class="ml-2" for="failed-id">Failed</label>
         </div>
       </div>
-    </ng-template>
-  </p-table>
+    </div>
+    <div class="col-12">
+      <div class="flex flex-column gap-2">
+        <label for="test-case-observations">Observations</label>
+        <input autocomplete="off" id="test-case-observations" pInputText/>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="text-left">Download template</h4>
+  <div class="grid mb-5 text-center">
+    <div class="col-6">
+      <p-button [rounded]="true" icon="pi pi-download" label="PDF"></p-button>
+    </div>
+    <div class="col-6">
+      <p-button [rounded]="true" icon="pi pi-download" label="PNG"></p-button>
+    </div>
+  </div>
 </main>
